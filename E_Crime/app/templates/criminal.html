@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Criminal Page{% endblock title %}
+
+
+{% block content %}
+
+<style>
+    #customers {
+      font-family: Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    #customers td, #customers th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    
+    #customers tr:nth-child(even){background-color: #f2f2f2;}
+    
+    #customers tr:hover {background-color: #ddd;}
+    
+    #customers th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #04AA6D;
+      color: white;
+    }
+</style>
+
+
+
+
+<div class="container" style="padding: 50px;">
+  <form>
+    <input type="search" name="search" id="">
+    <button type="submit">Search</button>
+  </form>
+    <table id="customers" style="margin-top:20px;" >
+        <tr>
+          <th>Criminal Id</th>
+          <th>Criminal Name</th>
+          <th>Crime Types</th>
+          <th>Picture</th>
+        </tr>
+        {% for n in criminalData %}
+        <tr>
+          <td>{{n.criminal_id}}</td>
+          <td>{{n.criminal_name}}</td>
+          <td>{{n.crime_type}}</td>
+          <td><img src="{{n.criminal_image.url}}" alt="" style="height: 100px; width:120px;"></td>
+        </tr>
+        {% empty %}
+    <div class="alert" style="background-color: rgb(227, 27, 27); margin:50px 0; width:80%; color:#fbfbfb">
+      <strong><h2>No Criminals Info Found <br> <h3>Please Insert Valid Name</h3> </h2></strong>
+    </div>
+        {% endfor %}
+
+    </table>
+</div>
+
+
+
+
+
+
+{% endblock content %}
+
+
+
+
+
+

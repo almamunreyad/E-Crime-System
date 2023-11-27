@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+{% block title %}Form Page{% endblock title %}
+{% load static %}
+
+
+{% block content %}
+
+    <style>
+        label {
+            padding: 12px 12px 12px 0;
+            display: inline-block;
+            color: white;
+          }
+          
+          input[type=text],
+          [type=email],
+          [type=password] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+          }
+          
+          input[type=submit] {
+            margin: 40px auto 10px auto;
+            display: block;
+            background-color: whitesmoke;
+            color: black;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+          }
+          
+          input[type=submit]:hover {
+            background-color: #0d3682;
+            color: white;
+          }
+          
+          .container {
+            border-radius: 4px;
+            background-color: #0071bc;
+            padding: 20px;
+            width: 60%;
+            margin: auto;
+          }
+          
+          .col-25 {
+            float: left;
+            width: 25%;
+            margin-top: 6px;
+          }
+          
+          .col-75 {
+            float: left;
+            width: 70%;
+            margin-top: 6px;
+          }
+          
+          /* Clear floats after the columns */
+          .row:after {
+            content: "";
+            display: table;
+            clear: both;
+          }
+          
+          /* make it responsive */
+          @media screen and (max-width: 600px) {
+          
+            .col-25,
+            .col-75,
+            input[type=submit] {
+              width: 90%;
+              margin-top: 0;
+            }
+          
+            input[type=submit] {
+              margin-top: 30px;
+          
+            }
+          
+            .container {
+              width: 90%;
+            }
+          
+          }
+          
+          @media screen and (min-width: 601px) and (max-width: 900px) {
+            .container {
+              width: 80%;
+            }
+          }
+    </style>
+
+    
+<div class="container" style="margin-top: 100px;">
+    {% if msg %}
+    <h2 style="text-align: center; margin-top:100px;">{{msg}}</h2>
+    {% endif %}
+
+    <form action="{% url 'formpage' %}" method="POST" enctype="multipart/form-data">
+        
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="col-25">
+                <label for="">Criminal Image</label>
+            </div>
+            <div class="col-75">
+                <input type="file" name="image"  style="border-radius: 4px; width: 100%; border: 1px solid #ccc;" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                <label for="">Criminal Id</label>
+            </div>
+            <div class="col-75">
+                <input type="text" name="crim_id" placeholder="Enter Criminal Id" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                <label for="">Full Name</label>
+            </div>
+            <div class="col-75">
+                <input type="text" name="name" placeholder="Enter Criminal Full Name" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                <label for="">National Id</label>
+            </div>
+            <div class="col-75">
+                <input type="text" name="nation_id" placeholder="Enter Criminal National Id" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                <label for="">Phone Number</label>
+            </div>
+            <div class="col-75">
+                <input type="text" name="phone" placeholder="Enter Criminal Phone Number" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                <label for="">Gender</label>
+            </div>
+            <div class="col-75" >
+                <input type="radio" name="gender" value="Male" style= "border: 1px solid #ccc;"> Male | <br>
+                <input type="radio" name="gender" value="Female" style=" border: 1px solid #ccc;"> Female
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                <label for="">Crime Date</label>
+            </div>
+            <div class="col-75" style="width: 73.5%;">
+                <input type="date" style="border-radius: 4px; width: 100%; border: 1px solid #ccc;" name="date" placeholder="Enter Crime Date" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="">Crime Report</label>
+            </div>
+            <div class="col-75" style="width: 73.5%;">
+                <textarea style="border-radius: 4px; width: 100%; border: 1px solid #ccc;" name="report" id="" cols="78" rows="10" placeholder="What types of crime he/she did ?"
+                    required></textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <input type="submit" name="save" value="send">
+        </div>
+
+    </form>
+</div>
+
+{% endblock content %}
+
+
